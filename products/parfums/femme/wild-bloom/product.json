@@ -11,16 +11,16 @@
   "variants": [
     {
       "size": "30ml",
-      "price": 85.00,
+      "price": 1.00,
       "sku": "SKU-WB-FEM-30",
       "images": [
-        "/products/parfums/femme/wild-bloom/f2.jpeg"
+        "/products/parfums/femme/wild-bloom/image.webp"
       ],
       "stock": 30
     },
     {
       "size": "70ml",
-      "price": 135.00,
+      "price": 35.00,
       "sku": "SKU-WB-FEM-70",
       "images": [
         "/products/parfums/femme/wild-bloom/f1.jpeg"
