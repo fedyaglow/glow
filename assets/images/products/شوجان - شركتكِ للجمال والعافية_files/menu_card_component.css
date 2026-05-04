@@ -1,0 +1,64 @@
+.menu-card-container {
+    background-color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 16px;
+    padding: 16px;
+    flex-direction: row;
+}
+
+.menu-card-item {
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    flex-direction: column;
+    width: 100%;
+    aspect-ratio: 1/1;
+    transition: all 0.3s ease-out;
+    position: relative;
+    z-index: 1;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-card-item:hover {
+    border: none;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    /* filter: grayscale(50%); */
+}
+
+.menu-card-item .caption {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    padding: 16px;
+}
+
+.menu-card-item .caption h1,
+.menu-card-item .caption h2 {
+    color: #FFF;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 150%;
+    font-size: 14px;
+    margin: 0;
+    text-align: left;
+}
+
+.menu-card-item .caption h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+}
+
+.menu-card-item .caption h2 {
+    font-weight: 400;
+    font-size: 14px;
+}

@@ -1,0 +1,162 @@
+function adjustQuantity($element, increment) {
+    let q = parseInt($element.attr("alt")) + increment;
+    q = Math.max(1, Math.min(q, 20)); // garantisce che q sia tra 1 e 20
+    $element.attr("alt", q).html(q);
+    let btn_add = $('.modal-full-button');
+    if (btn_add) {
+        btn_add.attr("alt", q);
+    }
+}
+
+$(function(){
+    var last_parent_class = '';
+
+    //Aggiungi al ccarrello nuovo layout
+    $("body").on("click", ".quantity_minus", function() {
+        let $counter = $(this).closest(".p_buy_card").find('.quantity_counter');
+        adjustQuantity($counter, -1);
+    });
+
+    $("body").on("click", ".quantity_plus", function() {
+        let $counter = $(this).closest(".p_buy_card").find('.quantity_counter');
+        adjustQuantity($counter, 1);
+    });
+
+    $("body").on("click", ".add_promo_to_cart", function() {
+        let $card = $(this).closest(".p_buy_card");
+        let q = parseInt($card.find('.quantity_counter').attr("alt"));
+        let id_art = $card.find(".quantity_id_art").val();
+        add_cart(id_art, q, 1);
+    });
+
+    // $("body").on("click", ".show_product_content", function(){
+    //     let parent_class = $(this).attr("data-parent-class");
+    //     let css_class = $(this).attr("data-class");
+    //     let isBuyable = $(this).attr("data-isBuyable");
+    //     let key = $(this).attr("data-key");
+
+    //     let $card = $(this).closest(".product_promo_card");
+    //     let id_art = ($(this).attr('idArticolo')==undefined) ? $card.find(".quantity_id_art").val() : $(this).attr('idArticolo');
+
+    //     let title = $(this).attr("alt4");
+
+    //     let inWish = $(this).attr('data-inWishlist') !== undefined ? $(this).attr('data-inWishlist') : 0;
+    //     let percentage = $(this).attr('data-percentage') !== undefined ? $(this).attr('data-percentage') : 0;
+    //     let message = $(this).attr('data-message') !== undefined ? $(this).attr('data-message') : '';
+    //     let multiple = $(this).attr('data-multiple') !== undefined ? $(this).attr('data-multiple') : '';
+
+    //     $("#modal_class").html("");
+    //     $("#modal_class_title").html("");
+    //     if(title!='') $("#modal_class_title").html(title);
+    //     $(".modal-body").removeClass(last_parent_class).addClass(parent_class);
+    //     last_parent_class = parent_class;
+    //     $.ajax({
+    //         type: "get",
+    //         url: "/get_article/"+id_art+"/"+css_class+"/"+isBuyable+"/"+inWish+"/"+key+"/"+percentage+"/"+message+"/"+multiple,
+    //         dataType: "json",
+    //         success: function (response) {
+
+    //             $("#modal_class").html(response.html);
+
+    //             // if(response.title!='') $("#modal_class_title").html(response.title);
+
+    //             setTimeout(() => {
+    //                 $("#ModalProductContent").modal();
+    //                 [].forEach.call(document.querySelectorAll('img[data-src]'), function(img) {
+    //                     img.setAttribute('src', img.getAttribute('data-src'));
+    //                     img.onload = function() {
+    //                         img.removeAttribute('data-src');
+    //                     };
+    //                 });
+    //             }, 30);
+    //         }
+    //     });
+    // });
+
+    // fallback per la classe precedente sulla modal-body
+    var last_parent_class = window.last_parent_class || "";
+
+    // funzione riusabile per click/option change
+    function openProductModalFrom($src) {
+        let parent_class = $src.attr("data-parent-class") || "";       // opzionale nelle option
+        let css_class    = $src.attr("data-class") || "day";
+        let isBuyable    = $src.attr("data-isBuyable") || 1;
+        let key          = $src.attr("data-key") ?? "not_specified";
+
+        // id articolo: da attributo o da value/contesto
+        let id_art = $src.attr("idArticolo")
+                || $src.val()
+                || $src.closest(".product_promo_card").find(".quantity_id_art").val();
+
+        // title: supporta alt4 (bottoni) e alt2 (options)
+        let title = $src.attr("alt4") || $src.attr("alt2") || "";
+
+        let inWish     = $src.attr("data-inWishlist")  ?? 0;
+        let percentage = $src.attr("data-percentage")  ?? 0;
+        let message    = $src.attr("data-message")     ?? 0;
+        let multiple   = $src.attr("data-multiple")    ?? 0;
+        let qty_min   = $src.attr("data-qty")    ?? 1;
+
+        $("#modal_class").html("");
+        $("#modal_class_title").html("");
+        if (title !== '') $("#modal_class_title").html(title);
+
+        if (last_parent_class) $(".modal-body").removeClass(last_parent_class);
+        if (parent_class)      $(".modal-body").addClass(parent_class);
+        last_parent_class = parent_class;
+
+        $.ajax({
+            type: "get",
+            url: "/get_article/"+id_art+"/"+css_class+"/"+isBuyable+"/"+inWish+"/"+key+"/"+percentage+"/"+qty_min+"/"+message+"/"+multiple,
+            dataType: "json",
+            success: function (response) {
+                $("#modal_class").html(response.html);
+                setTimeout(() => {
+                    $("#ModalProductContent").modal();
+                    // lazyload img[data-src]
+                    document.querySelectorAll('img[data-src]').forEach(function(img){
+                        img.setAttribute('src', img.getAttribute('data-src'));
+                        img.onload = function(){ img.removeAttribute('data-src'); };
+                    });
+                }, 30);
+            }
+        });
+    }
+
+    // CLICK (tuo handler esistente, riscritto per usare la funzione)
+    $("body").on("click", ".show_product_content", function(){
+        openProductModalFrom($(this));
+    });
+
+    // CHANGE sulla select (usa la option selezionata)
+    $("body").on("change", "select#other_prod, select[name='select_prod']", function(){
+        const $opt = $(this).find("option:selected");
+        if ($opt.length) openProductModalFrom($opt);
+    });
+    // CHANGE sulla select (usa la option selezionata)
+    $("body").on("change", "select#other_prod2, select[name='select_prod']", function(){
+        const $opt = $(this).find("option:selected");
+        if ($opt.length) openProductModalFrom($opt);
+    });
+});
+
+
+function normalizeCardHeights(element) {
+    setTimeout(() => {
+        let maxHeight = 0;
+
+        // Resetta l'altezza per evitare calcoli errati
+        $(element + " .item").css("height", "auto");
+
+        // Trova l'altezza massima tra tutte le card
+        $(element + " .item").each(function () {
+            let thisHeight = $(this).outerHeight();
+            if (thisHeight > maxHeight) {
+                maxHeight = thisHeight;
+            }
+        });
+
+        // Applica l'altezza massima a tutte le card
+        $(element + " .item").css("height", maxHeight + "px");
+    }, 1250); // Un leggero ritardo per assicurarsi che gli elementi siano renderizzati
+}

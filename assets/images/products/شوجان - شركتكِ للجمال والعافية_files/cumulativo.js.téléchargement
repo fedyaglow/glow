@@ -1,0 +1,64 @@
+
+function checkPageFocus() {
+    let body = document.querySelector('body');
+    //let log = document.getElementById('mini-nav');
+
+    if (document.hasFocus()) {
+        //log.textContent = ('This document has the focus.');
+    }
+  }
+  setInterval(checkPageFocus, 900000);
+
+$(function(){
+
+	// Recupero nominativo del consulente
+	$('body').on('keyup','#SponsorCode',function(){
+		let txt = $(this).val();
+		$.ajax({
+			url: "/get_sponsor",
+			type: 'GET',
+			data: {spcode:txt}
+		})
+		.done(function(esito) {
+			$('#name_sponsor').val(esito.user);
+		})
+	})
+
+	// Assumo identita dell'utente
+	$('body').on('click','#assumi',function(){
+		wait('show');
+		let spcode = $('#SponsorCode').val();
+		$.ajax({
+			url: '/get_identity/'+spcode,
+			type: 'GET',
+			// data: {spcode:spcode},
+		})
+		.done(function(esito) {
+			wait('hide');
+			if(esito.err!='') error(esito.err);
+			else {
+				success(esito.success,function(){
+					location.reload();
+				});
+			}
+		})
+	})
+
+	// Torna alla tua identità
+	$('body').on('click','.cumulativo_back', function() {
+		wait();
+		$.ajax({
+			type: "get",
+			url: "/get_your_identity",
+			success: function (response) {
+				wait('hide');
+				if($.trim($.trim(response.err))=='') {
+					success($.trim(response.success),function(){
+						location.reload();
+					})
+				} else error(response.err);
+			}
+		});
+	});
+
+})

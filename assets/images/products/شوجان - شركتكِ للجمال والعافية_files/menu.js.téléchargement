@@ -1,0 +1,65 @@
+$(document).ready(function() {
+    $('#hover-menu li:not(.has-submenu):not(.sub-item), #hover-socials a').hover(function() {
+        window.submenu = true;
+        setTimeout(function() {
+            $('#root-menu .sub-menu').removeClass('visible');
+            $('#hover-menu li a').removeClass('current');
+        }, 50);
+    }, function() {});
+
+    $('#hover-menu li a[rel]').hover(function() {
+        var id = '.'+$(this).attr('rel');
+        window.submenu = id;
+        $('#hover-menu li a').removeClass('current');
+        $(this).addClass('current');
+
+        setTimeout(function() {
+            if (window.submenu == id) {
+                $('#root-menu .sub-menu').removeClass('visible');
+                $('#root-menu '+id+':not(.d-none)').addClass('visible');
+            }
+        }, 10);
+
+        setTimeout(function() {
+            if (window.submenu == id) {
+                $('#root-menu '+id+'.d-none').addClass('visible');
+            }
+        }, 100);
+    }, function(){});
+
+    $(document).click((event) => {
+        if (!$(event.target).closest('#hover-menu li a.current').length && !$(event.target).closest('#root-menu .sub-menu.visible').length) {
+            window.submenu = true;
+            setTimeout(function() {
+                $('#root-menu .sub-menu').removeClass('visible');
+                $('#hover-menu li a').removeClass('current');
+            }, 50);
+        }
+    });
+
+    $('#hamburger-menu').click(function() {
+        $('html').removeClass('menu-fullscreen');
+        $('#menu-container').addClass('closing').removeClass('open');
+
+        setTimeout(function() {
+            $('#menu-container').removeClass('closing');
+            $('#menu-container').hide();
+        }, 750);
+    });
+
+    $('.open-menu').click(function() {
+        $('html').addClass('menu-fullscreen');
+        $('#menu-container').show();
+        $('#menu-container').addClass('opening');
+
+        setTimeout(function() {
+            $('#menu-container').addClass('open').removeClass('opening');
+        }, 750);
+    });
+
+    var scene = $("#menu-container #hover-menu-squares").get(0);
+    if (typeof scene !== 'undefined') {
+        var parallaxInstance = new Parallax(scene, {relativeInput:!0, selector:"#menu-container .menu-bg-square", hoverOnly:!0, originX:0.3, originY:0.5});
+    }
+    $('#menu-container').hide();
+});

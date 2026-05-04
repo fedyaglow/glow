@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fedya Glow | Parfumerie de Luxe & Cosmétiques</title>
+    <meta name="description" content="Découvrez l'essence de l'élégance avec Fedya Glow. Parfums exclusifs, soins de la peau et cosmétiques de haute qualité.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Icons (Lucide replacement) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-logo gold-text">FEDYA GLOW</a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Boutique</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-icon">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="menu-toggle md-hidden">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-img">
+            <img src="assets/images/hero.png" alt="Fedya Glow Luxury">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="gold-text">FEDYA GLOW</h1>
+            <p>L'Essence de l'Élégance & du Luxe</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="products.html" class="btn-gold">Découvrir la boutique</a>
+                <a href="about.html" class="btn-outline">Notre Histoire</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container" style="padding: 6rem 0;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+            <div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Nouveautés</h2>
+                <div style="width: 80px; height: 3px; background-color: var(--gold);"></div>
+            </div>
+            <a href="products.html" class="gold-text" style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; font-weight: bold;">Voir tout &rarr;</a>
+        </div>
+        
+        <div id="featured-grid" class="product-grid">
+            <!-- Products loaded by JS -->
+        </div>
+    </section>
+
+    <!-- Luxury Quote -->
+    <section style="background-color: var(--luxury-gray); padding: 6rem 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="container" style="text-align: center; max-width: 800px;">
+            <span style="font-size: 4rem; color: var(--gold); font-family: var(--font-serif); display: block; margin-bottom: 1rem;">"</span>
+            <p style="font-size: 1.5rem; font-style: italic; font-family: var(--font-serif); line-height: 1.8; color: #eee;">
+                Le parfum est l'ombre invisible de la personnalité. Chez Fedya Glow, nous capturons cette essence pour vous offrir une expérience sensorielle inégalée.
+            </p>
+            <span style="display: block; margin-top: 2rem; text-transform: uppercase; letter-spacing: 0.3em; font-size: 0.7rem; color: var(--gold); font-weight: bold;">— Excellence Chogan —</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="gold-text" style="margin-bottom: 1.5rem;">FEDYA GLOW</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Votre destination pour la parfumerie de luxe et les soins d'exception. L'élégance à portée de main.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="products.html">Boutique</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Collections</h4>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=Soins Personnels">Soins Personnels</a></li>
+                        <li><a href="products.html?category=Maquillage">Maquillage</a></li>
+                        <li><a href="products.html?category=Soins de la Maison">Soins de la Maison</a></li>
+                        <li><a href="products.html?category=Cafe et Alimentation">Café & Alimentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Aide</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Mentions Légales</a></li>
+                        <li><a href="#">CGV</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fedya Glow. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/33600000000" class="whatsapp-float" target="_blank">
+        <i data-lucide="message-circle" style="color: white; width: 32px; height: 32px;"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        async function initHomePage() {
+            const products = await loadAllProducts();
+            renderProducts(products.slice(0, 4), 'featured-grid');
+        }
+
+        document.addEventListener('DOMContentLoaded', initHomePage);
+    </script>
+</body>
+</html>

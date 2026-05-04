@@ -1,0 +1,43 @@
+{
+  "id": "id-parfums-femme-elegance-supreme-001",
+  "name": "Parfum Élégance Suprême",
+  "category": "Parfums",
+  "subcategory": "Femme",
+  "description": "L'Essence de l'élégance absolue. Un parfum floral et boisé aux notes envoûtantes de jasmin, de vanille et de bois de santal. Parfait pour vos soirées de gala.",
+  "brand": "Fedya Glow",
+  "gallery": [
+    "assets/images/products/parfum-elegance.png"
+  ],
+  "variants": [
+    {
+      "size": "50ml",
+      "price": 85.00,
+      "sku": "SKU-PARF-FEM-50",
+      "images": [
+        "assets/images/products/parfum-elegance.png"
+      ],
+      "stock": 30
+    },
+    {
+      "size": "100ml",
+      "price": 145.00,
+      "sku": "SKU-PARF-FEM-100",
+      "images": [
+        "assets/images/products/parfum-elegance.png"
+      ],
+      "stock": 15
+    }
+  ],
+  "tags": [
+    "Parfum",
+    "Femme",
+    "Luxe",
+    "Beauté"
+  ],
+  "isFeatured": true,
+  "createdAt": "2026-05-03T18:00:00.000Z",
+  "image": "assets/images/products/parfum-elegance.png",
+  "slug": "parfum-elegance-supreme",
+  "seoTitle": "Parfum Élégance Suprême pour Femme - Fedya Glow",
+  "seoDescription": "Achetez le Parfum Élégance Suprême. Fragrance florale et boisée de luxe par Fedya Glow."
+}

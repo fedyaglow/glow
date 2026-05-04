@@ -1,0 +1,409 @@
+.product_promo_card,
+.empty-card
+{
+    border-radius: 0;
+    border: 1px solid #ddd;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* gap: 24px; */
+    position: relative;
+    background-color: #FFF;
+    padding-top:32px;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+    /* height: 100%; */
+}
+
+.product_promo_card .freez {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: grayscale(80%);
+    z-index: 10000;
+    background-color: transparent;
+}
+
+.empty-card {
+    background-color: var(--color-sand);
+}
+
+.plus-bundle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 12px solid #FFF;
+    background-color: #f6f6f6;
+    color: #111;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 150%;
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 101;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.plus-bundle.hide {
+    opacity: 0;
+    display: none;
+}
+
+.plus-bundle:hover {
+    background-color: #ededed;
+}
+
+.plus-bundle svg {
+    width: 72px;
+    height: 72px;
+}
+
+.label-group {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: start; */
+    flex-direction: row;
+    gap: 16px;
+    height: 30px;
+    /*width: 100%;*/
+    overflow-y: visible;
+    position: relative;
+    /* z-index: 100000; */
+    z-index: 100;
+}
+
+.label-group .label {
+    height: 24px;
+    padding: 4px 10px;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: var(--color-sand);
+    width: fit-content;
+    text-wrap: nowrap;
+}
+
+.label-group .label.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row;
+}
+
+.label-group .tags-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.label-group .label.success {
+    background-color: #ECF3C3;
+}
+
+.label-group .label.danger {
+    background-color: #FFE4D8;
+}
+
+.product_promo_card .wish-button.icon-heart {
+    box-shadow: none;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.product_promo_card .wish-button {
+    stroke: var(--primary-color);
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.product_promo_card .wish-button.active {
+    fill: var(--primary-color);
+}
+
+.product_promo_card .cover-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.product_promo_card .cover-container .img {
+    width: 75% !important;
+    height: auto;
+}
+
+.product_promo_card .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px !important;
+    gap: 16px;
+    width: 100%;
+}
+
+.product_promo_card .button-group .eye-button {
+    height: 48px !important;
+    aspect-ratio: 1/1;
+    background-color: var(--color-sand);
+    border: none;
+}
+
+.product_promo_card button.show_product_content.eye-button {
+    color: var(--primary-color) !important;
+}
+
+.product_promo_card .button-group .eye-button:hover {
+    background-color: var(--color-sand-hover);
+}
+
+.product_promo_card .button-group .btn-black{
+    height: 46px !important;
+    /* width: calc(100% - 56px); */
+    width: 100%;
+}
+
+.not-available {
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    font-size: 13px;
+    width: fit-content;
+}
+
+.not-available span
+{
+    color: var(--primary-color) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin-bottom: 0;
+}
+
+.not-available span.circle-icon {
+    width: 8px;
+    aspect-ratio: 1/1;
+    background-color: #FFB74C;
+    display: inline;
+    border-radius: 100px;
+    flex: 0 0 8px;
+    height: 8px;
+    margin-top: 4px;
+}
+
+.not-available.success span.circle-icon  {
+    background-color: #23b12a;
+}
+
+.not-available.danger span.circle-icon  {
+    background-color: #CE2638;
+}
+
+.label.gradient {
+    background: linear-gradient(0deg, #B45FFF85 0%, #EFC09F85 25%, #FFE19785 48.08%, #5CC0FF85 100%);
+    color: #000;
+}
+
+.product_promo_card .caption {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product_promo_card .caption h1 {
+    color: #252B2E !important;
+    font-family: var(--secondary-font) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 22px !important;
+    margin-bottom: 0;
+}
+
+.product_promo_card .caption p {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+.color-light {
+    color: #53585A !important;
+}
+
+.product_promo_card .caption p.stong {
+    font-weight: 500;
+}
+
+.product_promo_card .variants {
+    width: 100%;
+}
+
+.product_promo_card .off-canvas {
+    background-color: #f8f8f8;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 100%;
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 100;
+    gap: 4px;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 100%;
+    display: flex;
+    visibility: hidden;
+}
+
+.product_promo_card .off-canvas.show {
+    top: 0;
+    opacity: 1;
+    transition: all 0.3s ease;
+    visibility: visible;
+}
+
+.product_promo_card .off-canvas .close-canvas {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: var(--primary-color) !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 21px !important;
+    width: 100% !important;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.product_promo_card .off-canvas .close-canvas:hover {
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    opacity: 0.3;
+}
+
+.product_promo_card .off-canvas .cover-container {
+    background-color: transparent !important;
+}
+
+.product_promo_card .off-canvas .cover-container img {
+    mix-blend-mode: multiply;
+    height: 120px !important;
+    width: auto !important;
+}
+
+.product_promo_card .product_select_format {
+    height: 48px;
+    padding: 13px 16px;
+    border-radius: 0;
+    border-color: #ddd;
+}
+
+.product_promo_card .product_select_format:focus {
+    box-shadow: none;
+    border-color: #ddd;
+    color: #000;
+}
+
+.barrato {
+    text-decoration: line-through !important;
+    color: var(--color-text-gray) !important;
+    font-weight: 600 !important;
+}
+
+.product_promo_card {
+    position: relative;
+}
+
+.quick-alert-card {
+    /* background-color: #1e1e1e; */
+    background-color: var(--color-sand);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10000000 !important;
+}
+
+.quick-alert-card.show {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.quick-alert-card .caption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-direction: row;
+}
+
+.quick-alert-card .caption p {
+    /* color: #FFF !important; */
+    text-align: center;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 21px !important;
+}
+
+.quick-alert-card .caption img {
+    width: 32px !important;
+}
+
+.troncato strong {
+    font-weight: 600;
+}
+
+.product_promo_card strong {
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .product_promo_card {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 1440px) {
+
+    .product_promo_card .cover-container .img {
+       width: 100%;
+    }
+
+}
+.new{
+    background: linear-gradient(270deg, rgba(186, 220, 255, 0.60) 0%, rgba(230, 166, 255, 0.46) 24.04%, rgba(255, 216, 170, 0.27) 54.81%, rgba(186, 220, 255, 0.30) 100%);
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier | Fedya Glow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .cart-item-img {
+            width: 100px;
+            height: 120px;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cart-item-info {
+            flex-grow: 1;
+        }
+        .cart-summary {
+            background-color: var(--luxury-gray);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            height: fit-content;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container">
+            <a href="index.html" class="nav-logo gold-text">FEDYA GLOW</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="products.html">Boutique</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="padding: 10rem 0 6rem;">
+        <div style="margin-bottom: 4rem;">
+            <h1 style="font-size: 3.5rem;">Votre Panier</h1>
+            <div style="width: 100px; height: 3px; background-color: var(--gold); margin-top: 1.5rem;"></div>
+        </div>
+
+        <div id="cart-container" style="display: grid; grid-template-columns: 2fr 1fr; gap: 4rem;">
+            <div id="cart-items">
+                <!-- Items loaded by JS -->
+            </div>
+            
+            <div class="cart-summary">
+                <h3 style="margin-bottom: 2rem;">Récapitulatif</h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <span style="color: #888;">Sous-total</span>
+                    <span id="subtotal">0,00 €</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: #888;">Livraison</span>
+                    <span style="color: var(--gold);">Offerte</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2.5rem;">
+                    <span style="font-weight: bold; font-size: 1.25rem;">Total</span>
+                    <span id="total" style="font-weight: bold; font-size: 1.5rem; color: var(--gold);">0,00 €</span>
+                </div>
+                
+                <button id="whatsapp-cart-btn" class="btn-whatsapp" onclick="handleCartWhatsAppOrder()">
+                    <i data-lucide="message-circle"></i>
+                    <span class="btn-text">👉 Commander via WhatsApp</span>
+                </button>
+                <a href="products.html" style="display: block; text-align: center; margin-top: 1.5rem; font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.1em;">Continuer mes achats</a>
+            </div>
+        </div>
+        
+        <div id="empty-cart" style="display: none; text-align: center; padding: 5rem 0;">
+            <i data-lucide="shopping-bag" style="width: 64px; height: 64px; color: #222; margin-bottom: 2rem;"></i>
+            <h2 style="margin-bottom: 1.5rem;">Votre panier est vide</h2>
+            <p style="color: #666; margin-bottom: 3rem;">Parcourez notre collection et trouvez votre signature olfactive.</p>
+            <a href="products.html" class="btn-gold">Boutique</a>
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function handleCartWhatsAppOrder() {
+            const btn = document.getElementById('whatsapp-cart-btn');
+            sendWhatsAppOrder(state.cart, btn);
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const cartSection = document.getElementById('cart-container');
+            const emptySection = document.getElementById('empty-cart');
+            
+            if (state.cart.length === 0) {
+                cartSection.style.display = 'none';
+                emptySection.style.display = 'block';
+                return;
+            }
+
+            cartSection.style.display = 'grid';
+            emptySection.style.display = 'none';
+
+            container.innerHTML = state.cart.map((item, idx) => `
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="${item.image}" alt="">
+                    </div>
+                    <div class="cart-item-info">
+                        <h4 style="font-size: 1.25rem; margin-bottom: 0.25rem;">${item.name}</h4>
+                        <p style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">${item.size}</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="color: #666; font-size: 0.9rem;">Quantité: ${item.quantity}</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="font-weight: bold; font-size: 1.25rem; margin-bottom: 1rem;">${formatPrice(item.price * item.quantity)}</p>
+                        <button onclick="removeFromCart(${idx})" style="color: #ff4444; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold;">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+
+            const totalValue = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('subtotal').textContent = formatPrice(totalValue);
+            document.getElementById('total').textContent = formatPrice(totalValue);
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+</body>
+</html>

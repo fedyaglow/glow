@@ -1,0 +1,43 @@
+{
+  "id": "wild-bloom-femme-001",
+  "name": "Wild Bloom",
+  "category": "parfums",
+  "subcategory": "femme",
+  "description": "Wild Bloom est un parfum féminin intense et élégant qui incarne la force et la sensualité moderne. Il s'ouvre sur des notes fraîches et lumineuses de mandarine et de pivoine, apportant une sensation florale délicate et raffinée. Au cœur, un bouquet sophistiqué de rose et d'osmanthus révèle une féminité profonde, douce et charismatique. Enfin, le fond chaleureux de bois de santal, patchouli et poivre rose laisse un sillage sensuel, élégant et durable. Ce parfum est destiné à la femme forte, confiante et naturellement séduisante.",
+  "brand": "Fedya Glow",
+  "gallery": [
+    "/products/parfums/femme/wild-bloom/f1.jpeg"
+  ],
+  "variants": [
+    {
+      "size": "30ml",
+      "price": 85.00,
+      "sku": "SKU-WB-FEM-30",
+      "images": [
+        "/products/parfums/femme/wild-bloom/f2.jpeg"
+      ],
+      "stock": 30
+    },
+    {
+      "size": "70ml",
+      "price": 135.00,
+      "sku": "SKU-WB-FEM-70",
+      "images": [
+        "/products/parfums/femme/wild-bloom/f1.jpeg"
+      ],
+      "stock": 15
+    }
+  ],
+  "tags": [
+    "Parfum",
+    "Femme",
+    "Floral",
+    "Luxe"
+  ],
+  "isFeatured": true,
+  "createdAt": "2026-05-04T00:00:00.000Z",
+  "image": "/products/parfums/femme/wild-bloom/f1.jpeg",
+  "slug": "wild-bloom-femme",
+  "seoTitle": "Wild Bloom Parfum Femme - Fedya Glow",
+  "seoDescription": "Achetez Wild Bloom, un parfum féminin floral, élégant et sensuel signé Fedya Glow."
+}
