@@ -1,0 +1,287 @@
+$(function(){
+    // Attiva il contenuto al click su una voce del menu
+    $('body').on("click", ".nav_custom_link", function (e) {
+        e.preventDefault();
+        $(".back_submenu").addClass("d-none");
+
+        var targetContent = $(this).data('target');
+
+        //Nascondo il div principale altrimenti fa l'effetto scomparsa-comparsa
+        $(targetContent).parent().addClass("d-none");
+
+        // Nascondi tutti i div con la classe "content"
+        $('.navbar_content_custom').not(targetContent).addClass("d-none");
+        $(targetContent).removeClass("d-none");
+        if($(targetContent).parent().hasClass("d-none")){
+            $(targetContent).parent().removeClass("d-none");
+        }
+
+        //Bette il bordo inferiore alla voce di menu
+        $(".megamenu-desktop .nav_custom_link_active").removeClass("nav_custom_link_active");
+        $(this).addClass("nav_custom_link_active");
+
+        if($(".open_megamenu").hasClass("d-none")){
+            $(".open_megamenu").removeClass("d-none");
+            //Carica la prima categoria ad ogni apertura
+            $(".megamenu_product_voice").first().trigger("click");
+        }
+
+        if($(this).attr('data-back') !== undefined){
+            let back_name = $(this).data("back");
+            $(".back_megamenu").removeClass("d-none");
+            $(".back_megamenu_voice").html(back_name);
+            if($(".megamenu_four_card").hasClass("d-none")){
+                $(".megamenu_four_card").removeClass("d-none");
+            }
+        } else {
+            if(!$(".back_megamenu").hasClass("d-none")){
+                $(".back_megamenu").addClass("d-none");
+            }
+            //Se sei su mobile e stai tornando alle voci di menu, nascondi questa sezione
+            if ($(window).width() <= 992) {
+                $(".megamenu_four_card").addClass("d-none");
+            } else {
+                //se sei su desktop, deve sempre essere visibile
+                if($(".megamenu_four_card").hasClass("d-none")){
+                    $(".megamenu_four_card").removeClass("d-none");
+                }
+            }
+        }
+
+        //Mostra le categorie di una macro-categoria su mobile
+        if ($(window).width() <= 992 && targetContent == '#content_prodotti') {
+            $(".megamenu_four_card").removeClass("d-none");
+
+            let id = 0;
+            let parent_name = '';
+            if($(this).attr('data-back') !== undefined){
+                id = 0;
+            } else {
+                $(".back_submenu").removeClass("d-none");
+                id = $(this).attr("data-id");
+                parent_id = $(".cat_"+id).attr("data-parent-id");
+                parent_name = $(".cat_"+id).html();
+                $(".back_submenu_voice").html(parent_name);
+                $(".back_submenu .nav_custom_link").attr("data-id", parent_id);
+                $(".back_submenu .nav_custom_link").attr("data-target", "#content_prodotti");
+                if(parent_id==0){
+                    $(".back_submenu .nav_custom_link").attr("data-back", "Prodotti");
+                } else {
+                    $(".back_submenu .nav_custom_link").removeAttr("data-back");
+                }
+            }
+            let voices = $(".menu_" + id);
+            let html = "";
+            let dividerInserted = false; // <— divider per mobile
+
+            voices.each(function() {
+                let element = $(this);
+                let href = element.attr("href");
+                let sub_name = element.html();
+                let sub_id = element.data("id");
+                let class_mobile = element.data("mobile-class");
+                let sub_class = ".menu_" + sub_id;
+
+                // Inserisci il divider PRIMA della prima categoria di livello 1
+                if (!dividerInserted && element.hasClass("megamenu_product_voice")) {
+                    html += '<div class="col-12 my-2"><div style="background:#999;height:1px;width:100%"></div></div>';
+                    dividerInserted = true;
+                }
+
+
+                html += '<div class="col mb-lg-4 my-2 py-2 py-lg-0 mt-lg-0">';
+                if ($(sub_class).length > 0) {
+                    html += '<a href="javascript:;" class="font-14 nav_custom_link d-flex w-100 justify-content-between '+class_mobile+'" data-id="' + sub_id + '" data-target="#content_prodotti">' + sub_name + ' <i class="fas fa-chevron-right fa-lg_ pt-2"></i></a>';
+                } else {
+                    html += '<a href="' + href + '" class="font-14 d-flex w-100 justify-content-between '+class_mobile+'">' + sub_name + ' <i class="fas fa-chevron-right fa-lg_ pt-2"></i></a>';
+                }
+                html += '</div>';
+            });
+            $(".submenu_voices").html(html);
+        }
+
+        if ($(window).width() <= 992 && (targetContent == '#content_area_personale' || targetContent == '#content_lang')) {
+            $(".megamenu_four_card").addClass("d-none");
+        }
+
+    });
+
+    // Chiudi il div se si clicca fuori da esso (gestione eventi touch)
+    $(document).on('mouseup touchstart', function (e) {
+        var container = $(".open_megamenu_container");
+
+        // Se il clic è al di fuori del div, nascondilo
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            $(".open_megamenu").addClass("d-none");
+            $(".megamenu-desktop .nav_custom_link_active").removeClass("nav_custom_link_active");
+        }
+
+    });
+
+    //Chiudi megamenu mobile
+    $(".close_megamenu").click(function(){
+        $(".open_megamenu").addClass("d-none");
+        $(".megamenu-desktop .nav_custom_link_active").removeClass("nav_custom_link_active");
+    });
+
+    //Mostra le categorie di una macro-categoria su desktop
+    $(".megamenu_product_voice").click(function(){
+        let id_cat = $(this).attr("data-id");
+        $(".megamenu_product_voice").removeClass("megamenu_product_voice_selected");
+        $(this).addClass("megamenu_product_voice_selected");
+        $(".megamenu_submenu").addClass("d-none");
+        $("#submenu_"+id_cat).removeClass("d-none");
+    });
+
+    //Cambio foto sezione brand
+    setupImageRotator('#megamenu_brand_image');
+    setupImageRotator('#megamenu_promo_image');
+
+    //Menu area riservata desktop
+    $('#profile-button').click(function() {
+        var overlay = $('#overlay');
+        positionProfileModal();
+
+        // Mostra il div del profilo e l'overlay
+        $('#profile-modal').fadeIn();
+        overlay.fadeIn();
+    });
+
+    $('#overlay').click(function() {
+        $('#profile-modal').fadeOut();
+        $(this).fadeOut();
+    });
+
+    $("#close-profile-modal").click(function() {
+        $('#profile-modal').fadeOut();
+        $('#overlay').fadeOut();
+    });
+
+    $(window).resize(function() {
+        if ($('#profile-modal').is(':visible')) {
+            positionProfileModal();
+        }
+    });
+    //Menu area riservata desktop
+
+    //Menu cambio lingua
+    $('#lang-button').click(function() {
+        // Apertura vecchio menu lingue
+        //var overlay = $('#overlay');
+        // positionlangModal();
+
+        // Mostra il div del profilo e l'overlay
+        // $('#lang-modal').fadeIn();
+        // overlay.fadeIn();
+
+        // Apertura nuove menu lingue
+        $('#lang-menu').addClass('show');
+        setTimeout(()=>{
+            $('#search-lang').focus();
+        }, 300)
+    });
+
+    $('#close-lang').click(function(){
+        $('#lang-menu').removeClass('show');
+    })
+
+    $('#overlay').click(function() {
+        $('#lang-modal').fadeOut();
+        $(this).fadeOut();
+    });
+
+    $("#close-lang-modal").click(function() {
+        $('#lang-modal').fadeOut();
+        $('#overlay').fadeOut();
+    });
+
+    $(window).resize(function() {
+        if ($('#lang-modal').is(':visible')) {
+            positionlangModal();
+        }
+    });
+    //Menu cambio lingua
+});
+
+function setupImageRotator(selector) {
+    var self = $(selector);
+    // Cancella un intervallo preesistente se presente
+    var existingIntervalId = self.data('intervalId');
+    if (existingIntervalId) {
+        clearInterval(existingIntervalId);
+    }
+
+    var base_url = self.attr('data-baseurl');
+    var ver = self.attr('data-ver') ? self.attr('data-ver') : 0;
+    var imagesAttr = self.attr('data-images'); // Recupera l'attributo data-images
+
+    if (!imagesAttr) {
+        //console.warn('L\'attributo data-images è assente o non valido per questo elemento:', self);
+        return; // Esce dalla funzione se l'attributo non è valido
+    }
+
+    var images = imagesAttr.split(','); // Esegui split solo se imagesAttr è definito
+
+    var count = 1;
+
+    var intervalId = setInterval(function() {
+        self.fadeOut(270, function() {
+            self.css('background', 'url('+base_url+ images[count]+'?ver='+ver+')');
+            count = (count + 1) % images.length;
+            self.fadeIn(270);
+        });
+    }, 3250);
+    self.data('intervalId', intervalId); // Salva l'ID dell'intervallo
+}
+
+function positionProfileModal() {
+    var profileButton = $('#profile-button');
+    var profileModal = $('#profile-modal');
+    var rect = profileButton[0].getBoundingClientRect();
+    var top = rect.top + profileButton.outerHeight() + 8;
+
+    // Aggiungi un offset orizzontale negativo
+    var left = rect.left - profileModal.outerWidth() / 2; // Sposta il modal più a sinistra
+
+    // Assicurati che il modal non esca dallo schermo a sinistra
+    if (left < 0) {
+        left = 10; // Un piccolo margine dal bordo sinistro
+    }
+
+    // Assicurati che il modal non esca dallo schermo a destra
+    var maxLeft = $(window).width() - profileModal.outerWidth() - 10;
+    if (left > maxLeft) {
+        left = maxLeft; // Un piccolo margine dal bordo destro
+    }
+
+    profileModal.css({
+        top: top + 'px',
+        left: left + 'px'
+    });
+}
+
+function positionlangModal() {
+    var langButton = $('#lang-button');
+    var langModal = $('#lang-modal');
+    var rect = langButton[0].getBoundingClientRect();
+    var top = rect.top + langButton.outerHeight() + 8;
+
+    // Aggiungi un offset orizzontale negativo
+    var left = rect.left - langModal.outerWidth() / 2; // Sposta il modal più a sinistra
+
+    // Assicurati che il modal non esca dallo schermo a sinistra
+    if (left < 0) {
+        left = 10; // Un piccolo margine dal bordo sinistro
+    }
+
+    // Assicurati che il modal non esca dallo schermo a destra
+    var maxLeft = $(window).width() - langModal.outerWidth() - 10;
+    if (left > maxLeft) {
+        left = maxLeft; // Un piccolo margine dal bordo destro
+    }
+
+    langModal.css({
+        top: top + 'px',
+        left: left + 'px'
+    });
+}

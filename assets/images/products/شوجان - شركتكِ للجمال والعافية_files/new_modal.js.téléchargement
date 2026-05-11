@@ -1,0 +1,14 @@
+// document.addEventListener('DOMContentLoaded', ()=>{
+//     const myModal = document.getElementById('ModalProductContent')
+//     if(myModal) {
+//         myModal.addEventListener('modalOpened', function() {
+//             const modalContent = myModal.querySelector('.content-modal');
+//             if(modalContent) {
+//                 const mcHeight = modalContent.clientHeight;
+//                 console.log(mcHeight);
+//             }    
+//         });
+//     }
+// })
+
+

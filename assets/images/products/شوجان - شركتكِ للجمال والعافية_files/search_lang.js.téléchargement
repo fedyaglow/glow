@@ -1,0 +1,20 @@
+// Menu lingue
+document.addEventListener('DOMContentLoaded', ()=>{
+    const langSearch = document.getElementById('search-lang');
+    if (langSearch) {
+        langSearch.addEventListener('keyup', e => {
+            const key = e.target.value.trim().toLowerCase();
+            const langCols = document.querySelectorAll('.lang-col');
+
+            langCols.forEach(el => {
+                const dataLang = el.getAttribute('data-lang')?.toLowerCase() || '';
+                // Mostra solo gli elementi che iniziano con la stringa cercata
+                if (dataLang.startsWith(key) || key === '') {
+                    el.classList.remove('d-none');
+                } else {
+                    el.classList.add('d-none');
+                }
+            });
+        });
+    }
+})

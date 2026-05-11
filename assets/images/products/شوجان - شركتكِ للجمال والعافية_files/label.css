@@ -1,0 +1,105 @@
+.label-custom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px;
+    width: fit-content;
+    font-family: var(--primary-font);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--primary-color);
+    border: 1px solid;
+}
+
+.label-custom.big {
+    padding: 12px;
+    font-weight: 500;
+}
+
+.label-custom.default {
+    background-color: #F0EEEB;
+    border-color: #DCDAD7;
+    color: #504E4B;
+}
+
+.label-custom.success {
+    background-color: #CDF2CF;
+    border-color: #CDF2CF;
+    color: #225E22;
+}
+
+.label-custom.danger {
+    background-color: #FCE4E1;
+    border-color: #FCE4E1;
+    color: #801E00;
+}
+
+.label-custom.warning {
+    background-color: #FCF6E1;
+    border-color: #FCF6E1;
+    color: #5C4900;
+}
+
+.label-custom.info {
+    background-color: #E3F9FB;
+    border-color: #E3F9FB;
+}
+
+.label-custom.neutral {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.label-custom strong {
+    font-weight: 700;
+}
+
+.circleImage {
+    height: 56px;      /* equals max image height */
+    width: 56px;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    overflow: hidden;
+    background-size: cover !important;
+}
+
+.circleImage img{
+    vertical-align: middle;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.icon-circle {
+    aspect-ratio: 1/1;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100px;
+    display: block;
+}
+
+.icon-circle.mini {
+    width: 12px;
+}
+
+.icon-circle.small {
+    width: 8px;
+}
+
+.icon-circle.success {
+    background-color: #11CE11;
+}
+
+.icon-circle.danger {
+    background-color: #CE3D11;
+}
+
+.icon-circle.warning {
+    background-color: #CE7F11;
+}
